@@ -23,15 +23,15 @@
 import numpy as np
 import copy
 
-from arad import ARAD
-from aras import ARAS
+from .arad import ARAD
+from .aras import ARAS
 
-from data import NUCLEAR_CHARGE
+from .data import NUCLEAR_CHARGE
 
-from representations import fgenerate_coulomb_matrix
-from representations import fgenerate_unsorted_coulomb_matrix
-from representations import fgenerate_local_coulomb_matrix
-from representations import fgenerate_atomic_coulomb_matrix
+from .representations import fgenerate_coulomb_matrix
+from .representations import fgenerate_unsorted_coulomb_matrix
+from .representations import fgenerate_local_coulomb_matrix
+from .representations import fgenerate_atomic_coulomb_matrix
 
 HOF_DFTB3 = dict()
 HOF_DFTB3["H"] = -172.3145
@@ -41,7 +41,7 @@ HOF_DFTB3["O"] = -1936.6161
 HOF_DFTB3["S"] = -1453.3907
 
 
-class Molecule:
+class Molecule(object):
 
     def __init__(self):
         self.natoms = -1
@@ -72,9 +72,9 @@ class Molecule:
         self.local_coulomb_matrix = fgenerate_local_coulomb_matrix( \
                 self.nuclear_charges, self.coordinates, self.natoms, size)
 
-    def generate_atomic_coulomb_matrix(self, calc="all",size=23):
+    def generate_atomic_coulomb_matrix(self, calc="all",size=23, cutoff=10**6, decay=0):
         self.atomic_coulomb_matrix = fgenerate_atomic_coulomb_matrix( \
-                self.nuclear_charges, self.coordinates, self.natoms, size)
+                self.nuclear_charges, self.coordinates, self.natoms, size, cutoff, decay)
 
     def generate_arad_descriptor(self, size=23):
         arad_object = ARAD(maxMolSize=size,maxAts=size)
@@ -129,8 +129,6 @@ class Molecule:
             self.coordinates.append(np.array([x, y, z]))
 
         self.coordinates = np.array(self.coordinates)
-
-
 
 def get_lines(filename):
 

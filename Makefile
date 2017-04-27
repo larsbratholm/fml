@@ -9,7 +9,7 @@ OBJECTS = \
 
 # Flags for Ifort and MKL
 IFORT_COMPILER_FLAGS = --fcompiler=intelem \
-					   --opt='-xHost -O3 -axAVX -qopenmp -funroll-loops -qopt-prefetch' \
+					   --opt='-fast -axCORE-AVX2 -unroll-aggressive -qopenmp -qopt-prefetch' \
 					   --f77flags='-warn unused -I${MKLROOT}/include'
 					   --f90flags='-warn unused -I${MKLROOT}/include'
 IFORT_LINKER_FLAGS = -liomp5 -lpthread -lm -ldl
@@ -32,7 +32,7 @@ MKL_LINKER_FLAGS = $(GNU_MKL_LINKER_FLAGS)
 # LINKER_FLAGS = $(IFORT_LINKER_FLAGS)
 # MKL_LINKER_FLAGS = $(IFORT_MKL_LINKER_FLAGS)
 
-F2PY_EXEC = /usr/local/bin/f2py
+F2PY_EXEC = f2py
 
 all: $(OBJECTS)
 

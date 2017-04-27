@@ -246,7 +246,7 @@ def fdists(mols1, mols2):
 if __name__ == "__main__":
     
     mols = []
-    path = "qm7_xyz/"
+    path = "xyz/"
     filenames = os.listdir(path)
 
     np.set_printoptions(linewidth=99999999999999999)

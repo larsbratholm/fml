@@ -161,26 +161,6 @@ def gaussian_kernel(A, B, sigma):
 
 
 def manhattan_distance(A, B,):
-    """ Calculates the Laplacian kernel matrix K, where K_ij:
-
-            K_ij = exp(-1 * sigma**(-1) * || A_i - B_j ||_1)
-
-        Where A_i and B_j are descriptor vectors.
-
-        K is calculated using an OpenMP parallel Fortran routine.
-
-        NOTE: A and B need not be input as Fortran contiguous arrays.
-
-        Arguments:
-        ==============
-        A -- np.array of np.array of descriptors.
-        B -- np.array of np.array of descriptors.
-        sigma -- The value of sigma in the kernel matrix.
-
-        Returns:
-        ==============
-        K -- The Laplacian kernel matrix.
-    """
 
     na = A.shape[1]
     nb = B.shape[1]

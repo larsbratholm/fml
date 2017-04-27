@@ -33,9 +33,6 @@ NUCLEAR_CHARGE["P"] = 15.0
 NUCLEAR_CHARGE["S"] = 16.0
 NUCLEAR_CHARGE["Ge"] = 32.0
 
-# from frepresentations import fgenerate_coulomb_matrix
-# import frepresentations
-
 def triangular_to_vector(M, uplo="U"):
 
     if not (M.shape[0] == M.shape[1]):
@@ -111,7 +108,6 @@ def generate_coulomb_matrix(atomtypes, coordinates, size=23):
 
     # return Mij.flatten(size**2)
     return triangular_to_vector(Mij)
-
 
 
 def generate_local_coulomb_matrix(atomtypes, coordinates, size=23, calc="all"):
@@ -209,11 +205,9 @@ def generate_local_coulomb_matrix(atomtypes, coordinates, size=23, calc="all"):
                 else:
                     Mij[i, j] = NUCLEAR_CHARGE[atomtype_i] * NUCLEAR_CHARGE[atomtype_j] \
                                 / np.linalg.norm(sorted_coordinates[i] - sorted_coordinates[j])
-    
+
         # return Mij.flatten(size**2)
         return triangular_to_vector[Mij]
-
-
 
 
 def generate_atomic_coulomb_matrix(atomtypes, coordinates, size=23, calc="all"):
@@ -233,7 +227,6 @@ def generate_atomic_coulomb_matrix(atomtypes, coordinates, size=23, calc="all"):
             distances.append((distance, j))
 
         distances.sort()
-        print distances
 
         for m, (dist_j, l) in enumerate(distances):
             for n, (dist_k, k) in enumerate(distances):
